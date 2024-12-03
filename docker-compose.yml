@@ -51,9 +51,9 @@ services:
         - USERNAME=${USERNAME:-devuser}
     volumes:
       # Mount the source code
-      - ../:/overlay_ws/src/
+      - ./src:/overlay_ws/src/
       # Mount maps
-      - ../:/overlay_ws/maps/
+      - ./maps:/overlay_ws/maps/
 
       # Mount colcon build artifacts for faster rebuilds
       - ./.colcon/build/:/overlay_ws/.colcon/build/:rw
