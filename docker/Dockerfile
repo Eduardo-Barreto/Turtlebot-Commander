@@ -21,6 +21,9 @@ RUN apt-get install -y --no-install-recommends \
  ros-humble-nav2-simple-commander ros-humble-tf-transformations \
  python3-transforms3d
 
+# Install rosbridge
+RUN apt-get install -y ros-humble-rosbridge-suite
+
 # Use Cyclone DDS as middleware
 RUN apt-get update && apt-get install -y --no-install-recommends \
  ros-${ROS_DISTRO}-rmw-cyclonedds-cpp
