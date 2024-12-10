@@ -52,6 +52,8 @@ services:
     volumes:
       # Mount the source code
       - ./src:/overlay_ws/src/
+      - ./tools:/overlay_ws/tools/
+      - ../src/:/overlay_ws/bot/
       # Mount maps
       - ./maps:/overlay_ws/maps/
 
@@ -67,7 +69,12 @@ services:
     extends: overlay
     command: ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
 
-  # Demo world
-  demo-world:
+  # Runs TurtleBot3 with Cartographer
+  cartographer:
     extends: overlay
-    command: ros2 launch tb3_worlds tb3_demo_world.launch.py
+    command: ros2 launch turtlebot3_cartographer cartographer.launch.py
+
+  # Teleop
+  teleop:
+    extends: overlay
+    command: python3 /overlay_ws/tools/teleop/main.py
