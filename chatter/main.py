@@ -9,10 +9,14 @@ import rclpy
 import os
 from dotenv import load_dotenv
 
+
 load_dotenv()
+dirname = os.path.dirname(__file__)
+
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+CONFIG_FILE_PATH = os.path.join(dirname, "config/locations.json")
 
 console = Console()
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 
 def main():
@@ -20,13 +24,14 @@ def main():
 
     console.print("[bold]Destinos disponíveis:[/bold]")
 
-    with open("config/locations.json") as f:
+    with open(CONFIG_FILE_PATH) as f:
         locations = json.load(f)
         for location in locations:
             console.print(f"- {location}")
+
     console.print("[bold magenta]> E aí, meu querido, o que manda?[/bold magenta]")
-    goal_extractor = GoalExtractor(GEMINI_API_KEY, "config/locations.json")
-    mapper = GoalMapper("config/locations.json")
+    goal_extractor = GoalExtractor(GEMINI_API_KEY, CONFIG_FILE_PATH)
+    mapper = GoalMapper(CONFIG_FILE_PATH)
     ros_client = ROSClient()
 
     try:
