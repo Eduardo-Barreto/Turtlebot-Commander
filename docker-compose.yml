@@ -69,7 +69,7 @@ services:
   # Runs TurtleBot3 with Cartographer
   cartographer:
     extends: overlay
-    command: ros2 launch turtlebot3_cartographer cartographer.launch.py
+    command: ros2 launch turtlebot3_navigation2 navigation2.launch.py map:=turtlebot_commander/maps/sim.yaml
 
   # Teleop
   teleop:
