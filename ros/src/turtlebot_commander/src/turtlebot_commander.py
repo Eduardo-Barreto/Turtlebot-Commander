@@ -4,6 +4,9 @@ from geometry_msgs.msg import PoseStamped
 from nav2_simple_commander.robot_navigator import BasicNavigator
 from rclpy.qos import QoSProfile
 from rclpy.qos import QoSDurabilityPolicy, QoSReliabilityPolicy
+from math import sin, cos
+from geometry_msgs.msg import Quaternion
+
 
 from commander_interfaces.srv import SetGoal
 
@@ -47,8 +50,12 @@ class TurtlebotCommander(Node):
 
         self.navigator.goToPose(goal_pose)
 
-        response.success = True
+
         self.get_logger().info("Goal sent successfully!")
+        while not self.navigator.isTaskComplete():
+            pass
+
+        response.success = True
         return response
 
     @staticmethod
@@ -56,9 +63,6 @@ class TurtlebotCommander(Node):
         """
         Utilitário para converter yaw em uma orientação quaternion.
         """
-        from math import sin, cos
-        from geometry_msgs.msg import Quaternion
-
         quaternion = Quaternion()
         quaternion.z = sin(yaw / 2.0)
         quaternion.w = cos(yaw / 2.0)
