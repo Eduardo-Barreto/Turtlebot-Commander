@@ -1,0 +1,4 @@
+yaspin
+rich==13.6.0
+google-generativeai
+python-dotenv

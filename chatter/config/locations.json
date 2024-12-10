@@ -1,0 +1,27 @@
+{
+    "biblioteca": {
+        "x": -2.89,
+        "y": -1.46,
+        "rotation": 0.7
+    },
+    "secretaria": {
+        "x": -1.39,
+        "y": 0.03,
+        "rotation": 0.7
+    },
+    "laboratorio": {
+        "x": -1.52,
+        "y": -1.17,
+        "rotation": 0.7
+    },
+    "auditorio": {
+        "x": -1.6,
+        "y": -2.3,
+        "rotation": 0.7
+    },
+    "nico": {
+        "x": -0.233,
+        "y": -0.004,
+        "rotation": 0.7
+    }
+}
