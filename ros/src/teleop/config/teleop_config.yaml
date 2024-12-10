@@ -1,9 +1,0 @@
-teleop_turtlebot3:
-  ros__parameters:
-    key_forward: "w"
-    key_backward: "s"
-    key_left: "a"
-    key_right: "d"
-    linear_speed: 0.2
-    angular_speed: 0.5
-    speed_modifier_factor: 2.0
