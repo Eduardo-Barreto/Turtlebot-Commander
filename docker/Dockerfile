@@ -63,8 +63,8 @@ FROM base AS overlay
 # Create an overlay Colcon workspace
 RUN mkdir -p /overlay_ws/src
 WORKDIR /overlay_ws
-COPY ./src/ ./src/
-COPY ./maps/ ./maps/
+COPY ./turtlebot_commander ./turtlebot_commander
+COPY ./chatter ./chatter
 RUN source /turtlebot3_ws/install/setup.bash \
  && rosdep install --from-paths src --ignore-src --rosdistro ${ROS_DISTRO} -y \
  && colcon build --symlink-install
@@ -72,6 +72,8 @@ RUN source /turtlebot3_ws/install/setup.bash \
 # Set up the entrypoint
 COPY ./docker/entrypoint.sh /
 ENTRYPOINT [ "/entrypoint.sh" ]
+
+RUN cd ./chatter && python3 -m pip install -r requirements.txt
 
 #####################
 # Development Image #

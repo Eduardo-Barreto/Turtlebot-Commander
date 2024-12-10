@@ -51,11 +51,8 @@ services:
         - USERNAME=${USERNAME:-devuser}
     volumes:
       # Mount the source code
-      - ./src:/overlay_ws/src/
-      - ./tools:/overlay_ws/tools/
-      - ../src/:/overlay_ws/bot/
-      # Mount maps
-      - ./maps:/overlay_ws/maps/
+      - ./turtlebot_commander:/overlay_ws/turtlebot_commander/
+      - ./chatter:/overlay_ws/chatter/
 
       # Mount colcon build artifacts for faster rebuilds
       - ./.colcon/build/:/overlay_ws/.colcon/build/:rw
@@ -77,4 +74,14 @@ services:
   # Teleop
   teleop:
     extends: overlay
-    command: python3 /overlay_ws/tools/teleop/main.py
+    command: python3 /overlay_ws/turtlebot_commander/tools/teleop/main.py
+
+  # Commander
+  commander:
+    extends: overlay
+    command: ros2 launch turtlebot_commander turtlebot_commander.launch.py
+
+  # Chatter
+  chatter:
+    extends: overlay
+    command: python3 /overlay_ws/chatter/main.py
